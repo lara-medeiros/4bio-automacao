@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
     const baseUrl = 'https://4-bio-processo-seletivo-lara.wiremockapi.cloud';
@@ -22,8 +22,9 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
         data: dadosParaEnviar
     });
 
-    const respostaJson = await response.json();
-    const listaDeErros = respostaJson.listaDeErros;
+    const body = await response.json();
+
+    const listaDeErros = body.listaDeErros;
     const mensagemDeErro = listaDeErros[0].Mensagem;
 
     expect(mensagemDeErro).toBe('O campo Id requer um valor maior que 0.');
