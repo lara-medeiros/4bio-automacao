@@ -25,6 +25,10 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
    
     expect(response.status(), `body: ${await response.text()}`).toBe(400);
 
+    // A API mockada (WireMock) não retorna 'Content-Type: application/json' corretamente,
+    // mas isso deve ser validado na API real para garantir que a resposta seja parseável como JSON.
+    // expect(response.headers()['content-type']).toContain('application/json');
+
     const body = await response.json();
 
     expect(body).toHaveProperty('listaDeErros');
