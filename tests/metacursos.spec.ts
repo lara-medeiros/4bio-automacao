@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
-    const baseUrl = 'https://4-bio-processo-seletivo-lara.wiremockapi.cloud';
-
     const token = 'tokenAuth';
     const dadosParaEnviar = {
         Id: -1,
@@ -15,7 +13,7 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
     };
 
     const timestampAntesDaRequest = Date.now()
-    const response = await request.post(`${baseUrl}/metacursos`, {
+    const response = await request.post('/metacursos', {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
