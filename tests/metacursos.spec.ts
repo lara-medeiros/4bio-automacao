@@ -14,6 +14,7 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
         DataLimitePreenchimento: '2024-09-30T23:59:59'
     };
 
+    const timestampAntesDaRequest = Date.now()
     const response = await request.post(`${baseUrl}/metacursos`, {
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -21,7 +22,9 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
         },
         data: dadosParaEnviar
     });
-
+    const timestampDepoisDaRequest = Date.now()
+    const tempoDeDuracao = timestampDepoisDaRequest - timestampAntesDaRequest;
+   
     expect(response.status(), `body: ${await response.text()}`).toBe(400);
 
     const body = await response.json();
@@ -30,4 +33,5 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
     expect(Array.isArray(body.listaDeErros)).toBe(true);
     expect(body.listaDeErros.length).toBeGreaterThanOrEqual(1);
     expect(body.listaDeErros[0].Mensagem).toBe('O campo Id requer um valor maior que 0.');
+    expect(tempoDeDuracao).toBeLessThan(1000);
 });
