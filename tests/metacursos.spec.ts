@@ -27,6 +27,7 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
     const body = await response.json();
 
     expect(body).toHaveProperty('listaDeErros');
+    expect(Array.isArray(body.listaDeErros)).toBe(true);
     const listaDeErros = body.listaDeErros;
     const mensagemDeErro = listaDeErros[0].Mensagem;
 
