@@ -33,7 +33,7 @@ test('Adicionar Meta de Curso - Teste de Validação', async ({ request }) => {
 
     expect(body).toHaveProperty('listaDeErros');
     expect(Array.isArray(body.listaDeErros)).toBe(true);
-    expect(body.listaDeErros.length).toBeGreaterThanOrEqual(1);
+    expect(body.listaDeErros.length).toBe(1);
 
     expect(body.listaDeErros[0]).toHaveProperty('Mensagem');
     expect(body.listaDeErros[0].Mensagem).toBe('O campo Id requer um valor maior que 0.');
